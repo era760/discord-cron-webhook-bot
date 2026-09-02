@@ -1,4 +1,4 @@
-name: Daily Discord Post
+name: Test Post
 
 on:
   workflow_dispatch:
