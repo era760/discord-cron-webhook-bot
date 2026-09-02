@@ -1,0 +1,19 @@
+name: Daily Discord Post
+
+on:
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Send Message to Discord
+        run: |
+          payload=$(jq -n --arg content "$MESSAGE" '{content: $content}')
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "$payload" \
+               "$WEBHOOK_URL"
+        env:
+          WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          MESSAGE: ${{ secrets.DISCORD_MESSAGE }}
