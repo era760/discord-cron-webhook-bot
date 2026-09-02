@@ -10,10 +10,11 @@ jobs:
       - name: Send Message to Discord
         run: |
           payload=$(jq -n --arg content "$MESSAGE" '{content: $content}')
-          curl -H "Content-Type: application/json" \
+          curl -sS -m 10 \
+               -H "Content-Type: application/json" \
                -X POST \
                -d "$payload" \
-               "$WEBHOOK_URL"
+               "${WEBHOOK_URL}?wait=true"
         env:
           WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           MESSAGE: ${{ secrets.DISCORD_MESSAGE }}
