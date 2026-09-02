@@ -1,0 +1,19 @@
+name: Daily Discord Post
+
+on:
+  schedule:
+    # JST 午前8:00（UTC 前日23:00）
+    - cron: '0 23 * * *'
+  workflow_dispatch: # Actionsタブから手動テスト実行できるように設定
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Message to Discord
+        run: |
+          curl -sS -m 10 \
+               -H "Content-Type: application/json" \
+               -X POST \
+               -d "$payload" \
+               "${WEBHOOK_URL}?wait=true"
