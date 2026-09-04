@@ -4,6 +4,10 @@ export interface Env {
 }
 
 export default {
+  async fetch(): Promise<Response> {
+    return new Response("OK");
+  },
+
   async scheduled(
     controller: ScheduledController,
     env: Env,
