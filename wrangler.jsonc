@@ -6,9 +6,9 @@
 
   "triggers": {
     "crons": [
-      "0 23 * * *"
+      "* * * * *"
     ]
-  },
+  }
 
   "observability": {
     "logs": {
